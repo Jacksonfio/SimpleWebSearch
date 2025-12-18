@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Analyzer and Generator</title>
+</head>
+<body>
+
+<input id="q" placeholder="Search here">
+<button onclick="search()">Search</button>
+
+<div id="results"></div>
+
+<script>
+const API_KEY = "your API key";
+const CX = "ID address";
+
+function search() {
+  const q = document.getElementById("q").value;
+  fetch(`https://www.googleapis.com/customsearch/v1?q=${q}&key=${API_KEY}&cx=${CX}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("results").innerHTML =
+        data.items.map(i => `<p><a href="${i.link}" target="_blank">${i.title}</a></p>`).join("");
+    });
+}
+</script>
+
+</body>
+</html>
